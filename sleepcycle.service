@@ -1,6 +1,0 @@
-[Service]
-ExecStart=/home/kandre/src/sleepcycle/listen-and-publish.py
-Restart=always
-
-[Install]
-WantedBy=multi-user.target

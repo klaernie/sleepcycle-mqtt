@@ -1,0 +1,8 @@
+[Service]
+Environment=MQTT_SERVER='mqtt.ak-online.be'
+Environment=MQTT_TOPIC=''
+ExecStart=/usr/bin/sleepcycle-mqtt
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

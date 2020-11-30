@@ -1,19 +1,23 @@
-#!/home/kandre/src/sleepcycle/venv/bin/python3
+#!/usr/bin/python3
 
 from zeroconf import ServiceBrowser, Zeroconf
 import paho.mqtt.client as mqtt
 import time
+import os
+
+mqtt_server = os.environ.get('MQTT_SERVER')
+mqtt_topic = os.environ.get('MQTT_TOPIC')
 
 mqttc = mqtt.Client()
 
-mqttc.connect("mqtt.ak-online.be")
+mqttc.connect(mqtt_server)
 mqttc.loop_start()
 
 SleepCycle_mDNS_Service = "_sleepcycle_ald._tcp.local."
 
 def publish( devicename, state):
     name = devicename.replace(".%s" % (SleepCycle_mDNS_Service), "")
-    topic = "sleepcycle/%s" % (name)
+    topic = "%s/%s" % (mqtt_topic, name)
     print("publishing to %s: %s" % (topic, state))
     mqttc.publish(topic, state)
 
