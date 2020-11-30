@@ -1,0 +1,10 @@
+**.swp
+debian/.debhelper/
+debian/debhelper-build-stamp
+debian/files
+debian/sleepcycle-mqtt.postinst.debhelper
+debian/sleepcycle-mqtt.postrm.debhelper
+debian/sleepcycle-mqtt.prerm.debhelper
+debian/sleepcycle-mqtt.substvars
+debian/sleepcycle-mqtt/
+
