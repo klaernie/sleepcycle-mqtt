@@ -1,0 +1,17 @@
+Source: sleepcycle-mqtt
+Section: python
+Priority: optional
+Maintainer: Andre Klaerner <kandre@ak-online.be>
+
+Package: sleepcycle-mqtt
+Architecture: all
+Depends:
+	python3,
+	python3-paho-mqtt,
+	python3-zeroconf
+Description: Publish Sleepcycle status changes to MQTT
+ This script provides simple means to push your start or end of sleep events
+ to an MQTT topic.
+ .
+ I personally use this to turn off all the lights when I set my alarm and turn
+ them back on when I wake up.

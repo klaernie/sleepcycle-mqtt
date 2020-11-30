@@ -1,0 +1,11 @@
+sleepcycle-mqtt (1.1) UNRELEASED; urgency=medium
+
+  * figure out, how this actually works
+
+ -- Andre Klaerner <kandre@ak-online.be>  Fri, 26 Oct 2018 19:38:31 +0200
+
+sleepcycle-mqtt (1.0) UNRELEASED; urgency=medium
+
+  * Initial release.
+
+ -- Andre Klaerner <kandre@ak-online.be>  Mon, 22 Oct 2018 20:55:50 +0200
