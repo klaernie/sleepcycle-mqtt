@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 from zeroconf import ServiceBrowser, Zeroconf
+import json
 import paho.mqtt.client as mqtt
 import time
 import os
@@ -9,6 +10,14 @@ mqtt_server = os.environ.get('MQTT_SERVER')
 mqtt_topic = os.environ.get('MQTT_TOPIC')
 
 mqttc = mqtt.Client()
+mqttc.will_set(f"{mqtt_topic}/bridgestate", payload="offline", qos=0, retain=True)
+
+def on_connect(client, userdata, flags, rc):
+    print("connected - sending bridge state")
+    client.publish(f"{mqtt_topic}/bridgestate", "online")
+
+
+mqttc.on_connect = on_connect
 
 mqttc.connect(mqtt_server)
 mqttc.loop_start()
@@ -16,10 +25,27 @@ mqttc.loop_start()
 SleepCycle_mDNS_Service = "_sleepcycle_ald._tcp.local."
 
 def publish( devicename, state):
-    name = devicename.replace(".%s" % (SleepCycle_mDNS_Service), "")
-    topic = "%s/%s" % (mqtt_topic, name)
-    print("publishing to %s: %s" % (topic, state))
-    mqttc.publish(topic, state)
+    name = devicename.replace(f".{SleepCycle_mDNS_Service}", "")
+    topicname = name.replace(" ", "_")
+    state_topic = f"{mqtt_topic}/{topicname}"
+
+    disco_msg = json.dumps(
+        {
+            "name": name,
+            "state_topic": state_topic,
+            "availability_topic": "sleepcycle/bridgestate",
+            "unique_id": topicname,
+            "device": {
+                "identifiers": "sleepcycle",
+                "name": "sleepcycle-mqtt",
+                "model": "sleepcycle-mqtt",
+            }
+        }
+    );
+    mqttc.publish("homeassistant/binary_sensor/sleepcycle/%s/config" % (topicname) , disco_msg, retain=True)
+
+    print("publishing to %s: %s" % (state_topic, state))
+    mqttc.publish(state_topic, state)
 
 class MyListener:
 

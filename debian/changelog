@@ -1,3 +1,9 @@
+sleepcycle-mqtt (2.0) testing; urgency=medium
+
+  * implement autodiscovery for homeassistant
+
+ -- Andre Klaerner <kandre@ak-online.be>  Mon, 30 Nov 2020 20:21:31 +0200
+
 sleepcycle-mqtt (1.1) UNRELEASED; urgency=medium
 
   * figure out, how this actually works
