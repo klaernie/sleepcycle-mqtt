@@ -33,7 +33,7 @@ def publish( devicename, state):
         {
             "name": name,
             "state_topic": state_topic,
-            "availability_topic": "sleepcycle/bridgestate",
+            "availability_topic": f"{mqtt_topic}/bridgestate",
             "unique_id": topicname,
             "device": {
                 "identifiers": "sleepcycle",
