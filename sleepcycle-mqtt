@@ -12,9 +12,13 @@ mqtt_topic = os.environ.get('MQTT_TOPIC')
 mqttc = mqtt.Client()
 mqttc.will_set(f"{mqtt_topic}/bridgestate", payload="offline", qos=0, retain=True)
 
+def i_am_alive():
+    print("sending bridge state")
+    mqttc.publish(f"{mqtt_topic}/bridgestate", "online")
+
 def on_connect(client, userdata, flags, rc):
-    print("connected - sending bridge state")
-    client.publish(f"{mqtt_topic}/bridgestate", "online")
+    print("connected")
+    i_am_alive()
 
 
 mqttc.on_connect = on_connect
@@ -65,6 +69,7 @@ browser = ServiceBrowser(zeroconf, SleepCycle_mDNS_Service, listener)
 
 while True:
     time.sleep(100)
+    i_am_alive()
 
 zeroconf.close()
 mqttc.loop_stop()

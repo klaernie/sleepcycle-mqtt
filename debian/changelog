@@ -1,3 +1,9 @@
+sleepcycle-mqtt (2.1) testing; urgency=medium
+
+  * do regular updates on the bridge state topic
+
+ -- Andre Klärner <kandre@ak-online.be>  Tue, 01 Dec 2020 08:36:42 +0100
+
 sleepcycle-mqtt (2.0) testing; urgency=medium
 
   * implement autodiscovery for homeassistant
