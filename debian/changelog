@@ -1,4 +1,4 @@
-sleepcycle-mqtt (3.0) UNRELEASED; urgency=medium
+sleepcycle-mqtt (3.0) testing; urgency=medium
 
   * upgrade to paho-mqtt 2.0
 
