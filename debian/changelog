@@ -1,3 +1,9 @@
+sleepcycle-mqtt (3.0) UNRELEASED; urgency=medium
+
+  * upgrade to paho-mqtt 2.0
+
+ -- Andre Klärner <kandre@ak-online.be>  Tue, 04 Jun 2024 23:18:18 +0200
+
 sleepcycle-mqtt (2.1) testing; urgency=medium
 
   * do regular updates on the bridge state topic

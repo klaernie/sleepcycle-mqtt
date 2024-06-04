@@ -9,14 +9,14 @@ import os
 mqtt_server = os.environ.get('MQTT_SERVER')
 mqtt_topic = os.environ.get('MQTT_TOPIC')
 
-mqttc = mqtt.Client()
+mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
 mqttc.will_set(f"{mqtt_topic}/bridgestate", payload="offline", qos=0, retain=True)
 
 def i_am_alive():
     print("sending bridge state")
     mqttc.publish(f"{mqtt_topic}/bridgestate", "online")
 
-def on_connect(client, userdata, flags, rc):
+def on_connect(client, userdata, flags, reason_code, properties):
     print("connected")
     i_am_alive()
 
@@ -56,6 +56,9 @@ class MyListener:
     def add_service(self, zeroconf, type, name):
         print("Service %s added" % (name))
         publish(name,"ON")
+
+    def update_service(self, zeroconf, type, name):
+        pass
 
     def remove_service(self, zeroconf, type, name):
         print("Device %s removed" % (name,))
